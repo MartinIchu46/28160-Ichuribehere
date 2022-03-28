@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "nombre":"Mazda RX7",
+        "marca":"Hot wheels",
+        "precio":750,
+        "stock":3,
+        "img":"mazda-rx7.jpg"
+
+    },
+    {
+        "id": 2,
+        "nombre":"Lamborghini Diablo",
+        "marca":"Tomica",
+        "precio":5000,
+        "stock":1,
+        "img":"lamborghini-diablo-tomica.jpg"
+
+    },
+    {
+        "id": 3,
+        "nombre":"Ferrari Laferrari",
+        "marca":"Tomica",
+        "precio":5000,
+        "stock":2,
+        "img":"ferrari-laferrari-tomica.jpg"
+
+    },
+    {
+        "id": 4,
+        "nombre":"Cadillac Fleetwood",
+        "marca":"Greenlight",
+        "precio":3500,
+        "stock":4,
+        "img":"cadillac-rosa-greenlight.jpg"
+
+    }
+]

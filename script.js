@@ -1,108 +1,42 @@
-class Producto {
-    constructor(marca, modelo, precio) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.precio = precio;
+let divProductos= document.getElementById('divProductos')
 
-    }
-    hayEnStock() {
-        if(this.cantidad == 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-
-
-
+async function obtenerProductos() {
+    const response= await fetch('./json/productos.json')
+    return await response.json()
 }
 
-/*const AlpineA110 = new Producto("Hot Wheels", "Renault Alpine A110", 1000)
-const BatimovilTheBatman = new Producto("Hot Wheels", "Batimovil The Batman", 900)
-const FerrariF40 = new Producto("Tomica", "Ferrari F40", 5000)
-const Ferrari512BB = new Producto("Tomica", "Ferrari 512BB", 4500)
-const ChevroletCorvette = new Producto("Jhonny Lightning", "Chevrolet Corvette 1956", 2500)*/
-
-/*producto1.hayEnStock()
-producto2.hayEnStock()
-producto3.hayEnStock()
-producto4.hayEnStock()
-producto5.hayEnStock()*/
-
-const arrayProductos = [];
-
-const arrayCarrito = [];
-
-const tituloDiv = document.getElementById("tituloDiv");
-
-let botonAutos = document.getElementById("botonAutos");
-let divAutos = document.getElementById("divAutos")
-let idForm = document.getElementById("idForm")
-
-botonAutos.addEventListener('click', () => {
-    arrayProductos.forEach((auto, indice) => {
-        divAutos.innerHTML += `
-        <div class="card" id= "Auto ${indice}" style="width: 18rem;">
-            <div class="card-body">
-            <h5 class="card-title">Modelo ${auto.modelo}</h5>
-            <p class="card-text">Marca ${auto.marca}</p>
-            <p class="card-text">Precio $${auto.precio}</p>
-            <button class="btn btn-danger"> Eliminar </button>
-            
-            </div>
-      </div>`
+obtenerProductos().then(productos => {
+    productos.forEach((producto)=>{
+        divProductos.innerHTML += `
+        <div class="card border-primary mb-3" id="producto${producto.id}" style="max-width: 20rem;">
+        <img src="./img/${producto.img}" class="card-img-top" alt="${producto.nombre}">
+        <div class="card-header">${producto.nombre}</div>
+        <div class="card-body">
+          <h4 class="card-title">${producto.marca}</h4>
+          <p class="card-text">$${producto.precio}</p>
+          <p class="card-text">Stock:${producto.stock}</p>
+          <button class="btn btn-dark" ind="boton${producto.id}>Comprar</button>
+        </div>    
+        `
     })
-    
-})
-
-const mostrarProducto = ()=> {
-    let divCaja = document.createElement("div");
-    divCaja.className= "caja";
-    tituloDiv.appendChild(divCaja);
-
-    carrito.forEach(element=>{
-        divCaja.innerHTML += `<div class="cajita">
-        <h3>NOMBRE $${element.nombre} </h3>
-        <h3>PRECIO $${element.precio * element.cantidad}</h3>
-        <h3>SUBTOTAl $${element.precio * element.cantidad}</h3>
-        <h3>CANTIDAD $${element.cantidad}</h3>
-        </div>`
-    });
-};
-
-
-localStorage.setItem('Autos', JSON.stringify(arrayProductos))
-let formAutos =document.getElementById('formAutos')
-
-/*let autosParseados = JSON.parse(localStorage.getItem('Autos'))
-console.log(autosParseados)*/
-
-formAutos.addEventListener('submit', (e) => {
-    e.preventDefault()
-    let dataForm = new FormData(e.target)
-    //console.log(dataForm.get('marca')) //document.getElementById('idMarca').value ----> son 2 formas de consultar la info
-
-    const auto = new Producto(dataForm.get('marca'), dataForm.get('modelo'), dataForm.get('precio'))
-    arrayProductos.push(auto)
-    localStorage.setItem('Autos', JSON.stringify(arrayProductos))
-    formAutos.reset()
-
-    Toastify({
-        text: "Cargaste un nuevo Producto",
-        duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
-        },
-        onClick: function(){} // Callback after click
-      }).showToast();
 })
 
 
 
+/*fetch('./json/productos.json')
+.then(res => res.json())  // convierte el json
+.then(productos => {
+    productos.forEach((producto)=>{
+        divProductos.innerHTML += `
+        <div class="card border-primary mb-3" id="producto${producto.id}" style="max-width: 20rem;">
+        <img src="./img/${producto.img}" class="card-img-top" alt="${producto.nombre}">
+        <div class="card-header">${producto.nombre}</div>
+        <div class="card-body">
+          <h4 class="card-title">${producto.marca}</h4>
+          <p class="card-text">${producto.precio}</p>
+          <p class="card-text">${producto.stock}</p>
+          <button class="btn btn-dark" ind="boton${producto.id}>Comprar</button>
+        </div>    
+        `
+    })
+})*/
